@@ -4,10 +4,11 @@ var	jade = require('gulp-jade');
 var	sass = require('gulp-ruby-sass');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
+var minifycss = require('gulp-minify-css');
 
 //Concat and Minify
 gulp.task('concat', function(){
-	return gulp.src('bev/script/*.js')
+	return gulp.src('dev/script/*.js')
 			.pipe(concat('main.js'))
 			.pipe(rename({suffix:'.min'}))
 			.pipe(uglify())
@@ -16,9 +17,12 @@ gulp.task('concat', function(){
 
 //Sass
 gulp.task('sass', function(){
-	return gulp.src('dev/css/style.scss', {style:'compressed'})
+	return gulp.src('dev/css/*.scss')
+			.pipe(sass({ style: 'expanded'}))
+			.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8','ie 9', 'opera 12.1'))
+			.pipe(gulp.dest('prod/assets/css'))
 			.pipe(rename({suffix:'.min'}))
-			.pipe(sass())
+			.pipe(minifycss())
 			.pipe(gulp.dest('prod/assets/css/'));
 });
 
@@ -38,7 +42,7 @@ gulp.task('watch', function(){
 })
 
 
-gulp.task('default', ['concat','watch']);
+gulp.task('default', ['concat','sass','template','watch']);
 
 
 
