@@ -1,0 +1,8 @@
+{
+  "name": "Parvez",
+  "version": "0.0.1",
+  "devDependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5"
+  }
+}
