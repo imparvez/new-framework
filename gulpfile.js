@@ -17,13 +17,8 @@ gulp.task('concat', function(){
 
 //Sass
 gulp.task('sass', function(){
-	return gulp.src('dev/css/*.scss')
-			.pipe(sass({ style: 'expanded'}))
-			.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8','ie 9', 'opera 12.1'))
-			.pipe(gulp.dest('prod/assets/css'))
-			.pipe(rename({suffix:'.min'}))
-			.pipe(minifycss())
-			.pipe(gulp.dest('prod/assets/css/'));
+	return sass('dev/css/style.scss', { style: 'expanded' })
+        	.pipe(gulp.dest('prod/assets/css/'));
 });
 
 //Jade Template
@@ -42,7 +37,7 @@ gulp.task('watch', function(){
 })
 
 
-gulp.task('default', ['concat','sass','template','watch']);
+gulp.task('default', ['concat','watch']);
 
 
 
