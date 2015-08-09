@@ -5,6 +5,7 @@ var	sass = require('gulp-ruby-sass');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var minifycss = require('gulp-minify-css');
+var browserSync = require('browser-sync');
 
 //Concat and Minify
 gulp.task('concat', function(){
@@ -18,8 +19,10 @@ gulp.task('concat', function(){
 //Sass
 gulp.task('sass', function(){
 	return sass('dev/css/style.scss', { style: 'expanded' })
-        	.pipe(gulp.dest('prod/assets/css/'));
+        	.pipe(gulp.dest('prod/assets/css/'))
 });
+
+gulp.task('sass-watch', ['sass'], browserSync.reload);
 
 //Jade Template
 gulp.task('template', function(){
@@ -32,7 +35,12 @@ gulp.task('template', function(){
 
 //Watch Task
 gulp.task('watch', function(){
-	gulp.watch('dev/css/style.scss', ['sass']);
+	browserSync({
+		server: {
+			baseDir: 'prod/'
+		}
+	})
+	gulp.watch('dev/css/style.scss', ['sass-watch']);
 	gulp.watch('dev/template/*.jade', ['template']);
 })
 
