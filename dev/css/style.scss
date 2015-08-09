@@ -17,6 +17,13 @@
 //Your Styling
 body {
     background: green;
+    transition: all 0.5s ease;
+    border-radius: 10px;
+    display: flex;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 

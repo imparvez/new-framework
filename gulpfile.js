@@ -5,6 +5,7 @@ var	sass = require('gulp-ruby-sass');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var minifycss = require('gulp-minify-css');
+var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync');
 
 //Concat and Minify
@@ -19,6 +20,10 @@ gulp.task('concat', function(){
 //Sass
 gulp.task('sass', function(){
 	return sass('dev/css/style.scss', { style: 'expanded' })
+					.pipe(autoprefixer({
+						browsers: ['last 2 versions'],
+						cascade: false
+					}))
         	.pipe(gulp.dest('prod/assets/css/'))
 });
 
