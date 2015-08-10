@@ -21,13 +21,11 @@ gulp.task('concat', function(){
 gulp.task('sass', function(){
 	return sass('dev/css/style.scss', { style: 'expanded' })
 					.pipe(autoprefixer({
-						browsers: ['last 2 versions'],
+						browsers: ['last 4 versions'],
 						cascade: false
 					}))
         	.pipe(gulp.dest('prod/assets/css/'))
 });
-
-gulp.task('sass-watch', ['sass'], browserSync.reload);
 
 //Jade Template
 gulp.task('template', function(){
@@ -38,6 +36,11 @@ gulp.task('template', function(){
 		.pipe(gulp.dest('prod/'));
 });
 
+//BrowserSync Task
+gulp.task('sass-watch', ['sass'], browserSync.reload);
+gulp.task('template-watch', ['template'], browserSync.reload);
+
+
 //Watch Task
 gulp.task('watch', function(){
 	browserSync({
@@ -46,7 +49,7 @@ gulp.task('watch', function(){
 		}
 	})
 	gulp.watch('dev/css/style.scss', ['sass-watch']);
-	gulp.watch('dev/template/*.jade', ['template']);
+	gulp.watch('dev/template/*.jade', ['template-watch']);
 })
 
 
