@@ -14,6 +14,8 @@
 //Importing States Folder
 @import "state/state";
 
+@import "bowerPackages/bourbon/app/assets/stylesheets/_bourbon.scss";
+
 //Your Styling
 body {
     background: green;
@@ -24,6 +26,12 @@ body {
 
 * {
     box-sizing: border-box;
+}
+
+section {
+	@include linear-gradient(to top, red, orange);
+	@include box-sizing(border-box);
+	@include size(10em);
 }
 
 
